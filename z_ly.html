@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link href="css/style.css" rel="stylesheet" />
+  <title>传统艺术-中国戏剧</title>
+</head>
+
+<body>
+  <div class="con">
+    <header>
+      <div class="logo1"><a href="毕设index.html"></a><img src="images/logo1.png"></div>
+      <div class="logo"><a href="index.html"> <img src="images/logo.png"> </a></div>
+      <nav>
+        <ul>
+          <li><a href="index.html">网站首页</a>
+            <div>
+              <a href="page1-1.html">戏剧语言</a>
+              <a href="page1-2.html">戏剧音乐</a>
+              <a href="page1-3.html">戏剧角色</a>
+            </div>
+          </li>
+          <li><a href="page1.html">历史沿革</a>
+            <div>
+              <a href="page2-1.html">宋元南戏</a>
+              <a href="page2-2.html">元代杂剧</a>
+              <a href="page2-3.html">清地方戏</a>
+              <a href="page2-4.html">近现代戏剧</a>
+            </div>
+          </li>
+          <li><a href="page2.html">艺术形式</a>
+            <div>
+              <a href="page3-1.html">艺术特点</a>
+              <a href="page3-2.html">戏剧精神</a>
+            </div>
+          </li>
+          <li><a href="page4.html">主要戏剧</a>
+            <div>
+              <a href="page4-1.html">京剧</a>
+              <a href="page4-2.html">北京曲剧</a>
+              <a href="page4-3.html">评剧</a>
+              <a href="page4-4.html">四平调</a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <div class="clear"></div>
+    </header>
+    <div class="clear"></div>
+    <div class="clear"></div>
+    <div class="main">
+      <div class="main_left">
+        <h1>二级导航</h1>
+        <div class="left_nav">
+          <ul>
+            <li><a href="z_dl.html">在线注册</a></li>
+            <li><a href="z_ly.html">立即登录</a></li>
+            <li><a href="z_zc.html">讨论交流</a></li>
+          </ul>
+          <div class="clear"></div>
+        </div>
+      </div>
+      <div class="main_right">
+        <h2>立即登录</h2>
+        <div class="  center "> <img src="images/w5.jpg" width="880" /> </div>
+        <script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+        <div class="Time"></div>
+        <script>
+          getDate()
+
+          function getDate() {
+
+            var timezone = 8;
+            var offset_GMT = new Date().getTimezoneOffset();
+            var nowDate = new Date().getTime();
+
+            var today = new Date(nowDate + offset_GMT * 60 * 1000 + timezone * 60 * 60 * 1000);
+            var date = today.getFullYear() + "-" + twoDigits(today.getMonth() + 1) + "-" + twoDigits(today.getDate());
+            var time = twoDigits(today.getHours()) + ":" + twoDigits(today.getMinutes()) + ":" + twoDigits(today.getSeconds());
+            $(".Time").html('当前日期：' + date);
+          }
+
+          function twoDigits(val) {
+            if (val < 10) return "0" + val;
+            return val;
+          }
+          $(function () {
+            setInterval(getDate, 1000);
+          });
+        </script>
+        <div class="Join">
+          <form action="#">
+            <div class="zhuce">
+              <div class="login_info">用户名：
+                <input class="input" type="text" name="username" />
+              </div>
+              <div class="login_info">密码：
+                <input class="input" type="password" name="password" />
+              </div>
+              <div class="subout">
+                <input type="submit" value="登录" class="sub" />
+              </div>
+            </div>
+          </form>
+          <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</body>
+
+</html>

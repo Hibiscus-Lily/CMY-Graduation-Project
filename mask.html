@@ -1,0 +1,214 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>面具</title>
+  </head>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      /* 文字不可选中 */
+      user-select: none;
+    }
+
+    .shopPage {
+      margin: 40px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: center;
+      align-content: stretch;
+    }
+
+    .main {
+      padding: 10px;
+      display: flex;
+      margin: 20px;
+      justify-content: space-between;
+      height: 100px;
+      width: 370px;
+      background-color: #ffffff;
+      border-radius: 7px;
+      transition: all 0.5s linear;
+    }
+
+    .main:hover {
+      transform: translateY(-3px);
+      box-shadow: #595959 0px 0px 10px 0px;
+      transition: all 0.5s ease-out;
+    }
+
+    .imagebox {
+      padding: 10px;
+      height: 80%;
+      width: 50%;
+    }
+
+    .title {
+      padding-top: 5px;
+      height: 100%;
+      width: 100%;
+    }
+
+    .title_one {
+      font-size: 20px;
+      padding: 0 0 5px 0;
+    }
+
+    .title_two {
+      color: #585858;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    img {
+      width: 60%;
+    }
+  </style>
+  <body>
+    <div class="shopPage">
+      <!-- 加载自定义html -->
+    </div>
+    <!-- 遮罩层 -->
+    <div class="modal">
+      <div>
+        <div>
+          <button onclick=""></button>
+        </div>
+        <iframe src="./shopping.html" frameborder="0"></iframe>
+      </div>
+    </div>
+  </body>
+</html>
+<script>
+  const JsonData = [
+    {
+      imagePath: "images/test/绿色.jpg",
+      title: "绿色脸谱",
+      data: "寓意：一般象征顽强、暴躁、典型人物：武天虬。",
+    },
+    {
+      imagePath: "images/test/蓝色.jpg",
+      title: "蓝色脸谱",
+      data: "寓意：一般象征刚直、桀骜不驯、有心计。典型人物：窦尔敦。",
+    },
+    {
+      imagePath: "images/test/金色.jpg",
+      title: "金银色脸谱",
+      data: "寓意：一般都是神仙、妖怪。典型人物：二郎神。",
+    },
+    {
+      imagePath: "images/test/黄色.jpg",
+      title: "黄色脸谱",
+      data: "寓意：一般象征枭勇、凶猛。典型人物：宇文成都。",
+    },
+    {
+      imagePath: "images/test/紫色.jpg",
+      title: "紫色脸谱",
+      data: "寓意：一般象征刚正、稳重、果断、有正义感。典型人物：廉颇、徐延昭等。",
+    },
+    {
+      imagePath: "images/test/白色.jpg",
+      title: "白色脸谱",
+      data: "寓意：一般象征阴险、狡诈。典型人物：曹操。",
+    },
+    {
+      imagePath: "images/test/黑色.jpg",
+      title: "黑色脸谱",
+      data: "寓意：一般象征正直、无私、刚烈，也象征粗率、鲁莽。典型人物：包拯、李逵等。",
+    },
+    {
+      imagePath: "images/test/红色.jpg",
+      title: "红色脸谱",
+      data: "寓意：一般象征忠义、英勇。典型人物：关羽、姜维等。",
+    },
+  ];
+
+  // 获取根节点
+  const rootDom = document.getElementsByClassName("shopPage")[0];
+
+  // 遍历 JosnData获取动态添加的图片地址、标题、详细信息
+  for (const s of JsonData) {
+    const imagePath = s["imagePath"];
+    const title = s["title"];
+    const data = s["data"];
+
+    // 创建main节点
+    const mainDom = document.createElement("div");
+    //添加class属性
+    mainDom.classList.add("main");
+    // 给main节点添加点击事件
+    mainDom.onclick = function goShopping() {
+      // 清空localStorage的内容
+      localStorage.clear;
+      // 设置需要购买的内容
+      localStorage.setItem("shopping", JSON.stringify(s));
+      console.log(s);
+      // 获取遮罩层dom
+      const maskDom = document.getElementsByClassName("modal")[0];
+      // 显示遮罩层
+      maskDom.style.display = "flex";
+      //
+    };
+    // 将main挂载到根节点
+    rootDom.appendChild(mainDom);
+    //创建imagebox节点
+    const imagebox = document.createElement("div");
+    // 给imagebox节点添加class
+    imagebox.classList.add("imagebox");
+    //创建imagebox节点下的img标签
+    const imagebox_img = document.createElement("img");
+    // 给img添加src
+    imagebox_img.src = imagePath;
+    // 将imagebox_img挂载到imagebox
+    imagebox.appendChild(imagebox_img);
+    // 将imagebox挂载到mainDom
+    mainDom.appendChild(imagebox);
+    // 创建右侧标题
+    const titleDiv = document.createElement("div");
+    // 添加class
+    titleDiv.classList.add("title");
+    // 创建标题
+    const title_one_div = document.createElement("div");
+    // 添加class
+    title_one_div.classList.add("title_one");
+    title_one_div.textContent = title;
+    // 创建详细内容
+    const title_two_div = document.createElement("div");
+    // 添加class
+    title_two_div.classList.add("title_two");
+    title_two_div.textContent = data;
+
+    //将两个title挂载到titleDiv
+    titleDiv.appendChild(title_one_div);
+    titleDiv.appendChild(title_two_div);
+    // 将titleDiv挂载到mainDom
+    mainDom.appendChild(titleDiv);
+
+    // <div class="main">
+    //   <div class="imagebox">
+    //     <img style="width: 60%" src="images/test/绿色.jpg" />
+    //   </div>
+    //   <div class="title">
+    //     <div class="title_one">绿色脸谱</div>
+    //     <div class="title_two">
+    //       寓意：一般象征顽强、暴躁、典型人物：武天虬。
+    //     </div>
+    //   </div>
+    // </div>
+  }
+
+  // 遮罩层控制
+  function maskLayerControl() {}
+</script>
