@@ -1,17 +1,17 @@
 /**
  * 全局状态管理
+ *
+ * @format
  */
-
+/**
+ * 初始化全局状态树
+ */
+store = window.store = {};
 /**
  * 创建状态
  * @param {any} key 关键字
  * @param {any} value 值
  */
-
-/**
- * 全局状态树
- */
-const store = {};
 function creat(key, value) {
   store[key] = value;
   return store;

@@ -7,7 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>面具</title>
   </head>
+  <!-- 引入jq -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <!-- 引入动画库 -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/animejs/3.2.1/anime.js"></script>
   <style>
+    /* 隐藏滚动条 */
+    ::-webkit-scrollbar {
+      display: none;
+    }
     body {
       margin: 0;
       padding: 0;
@@ -64,7 +72,8 @@
       color: #585858;
     }
     .modal {
-      display: none;
+      /* display: none; */
+      display: flex;
       flex-direction: row-reverse;
       justify-content: center;
       align-content: center;
@@ -83,16 +92,124 @@
       width: 90%;
       height: 80%;
     }
-    .iframeDiv {
+    .shoppingDiv {
       width: 100%;
       height: 100%;
       overflow: hidden;
+      overflow-y: auto;
       border-radius: 10px;
       background-color: #ffffff;
-      
+    }
+    .shoppingDiv > div {
+      display: flex;
+      /* 最好解决方案：
+      height: 98%
+      padding: shoppingDiv > div高度/100% 10px shoppingDiv > div高度/100% 10px
+      */
+      height: 97%;
+      padding: 6.2633px 10px 6.2633px 10px;
+      justify-content: flex-start;
     }
     svg:hover path {
       fill: red;
+    }
+    .shoppingDivLeft {
+      display: flex;
+      flex-wrap: wrap;
+      align-content: space-around;
+      justify-content: center;
+      width: 50%;
+    }
+    .shoppingDivLeftImg {
+      width: 50%;
+      background-color: aqua;
+    }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    .inputButton {
+      width: 50px;
+      height: 30px;
+      border-radius: 5px;
+      padding: 5px 10px;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      display: inline-block;
+      box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+        7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+    }
+
+    .inputButton {
+      border: none;
+      color: #000;
+    }
+
+    .inputButton:active {
+      top: 2px;
+    }
+    .inputButton span {
+      height: 12px;
+    }
+    input {
+      width: 40px;
+      text-align: center;
+      border: none;
+      margin: 8px;
+      border-radius: 5px;
+      height: 25px;
+      outline: none;
+    }
+
+    .custom-btn {
+      width: 130px;
+      height: 40px;
+      color: #fff;
+      border-radius: 5px;
+      padding: 10px 25px;
+      font-family: "Lato", sans-serif;
+      font-weight: 500;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      display: inline-block;
+      box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+        7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+      outline: none;
+    }
+
+    /* 16 */
+    .btn-16 {
+      border: none;
+      color: #000;
+    }
+    .btn-16:after {
+      position: absolute;
+      content: "";
+      width: 0;
+      height: 100%;
+      top: 0;
+      left: 0;
+      direction: rtl;
+      z-index: -1;
+      box-shadow: -7px -7px 20px 0px #fff9, -4px -4px 5px 0px #fff9,
+        7px 7px 20px 0px #0002, 4px 4px 5px 0px #0001;
+      transition: all 0.3s ease;
+    }
+    .btn-16:hover {
+      color: #000;
+    }
+    .btn-16:hover:after {
+      left: auto;
+      right: 0;
+      width: 100%;
+    }
+    .btn-16:active {
+      top: 2px;
     }
   </style>
   <body>
@@ -102,7 +219,7 @@
     <!-- 遮罩层 -->
     <div class="modal">
       <div>
-        <div style="float: right;padding-right: 10px;">
+        <div style="float: right; padding-right: 10px">
           <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
           <svg
             onclick="maskLayerControl(false)"
@@ -123,12 +240,28 @@
             ></path>
           </svg>
         </div>
-        <div class="iframeDiv">
-          <iframe
-            style="width: 100%; height: 100%"
-            src="./shopping.html"
-            frameborder="0"
-          ></iframe>
+        <div class="shoppingDiv">
+          <div>
+            <div class="shoppingDivLeft">
+              <img class="shoppingDivLeftImg" src="./images/test/红色.jpg" />
+            </div>
+            <div class="shoppingDivRight">
+              <div class="shoppingDivRightH">
+                <h1>111</h1>
+                <h6>222</h6>
+              </div>
+              <div>
+                <button class="inputButton" id="cut" style="color: red">
+                  <span> - </span>
+                </button>
+                <input id="num" type="text" value="1" />
+                <button class="inputButton" id="add" style="color: blue">
+                  <span> + </span>
+                </button>
+              </div>
+              <div><button class="custom-btn btn-16">Read More</button></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -136,6 +269,24 @@
 </html>
 <script src="./js/store.js"></script>
 <script>
+  function purchaseQuantityButton() {
+    $("#cut").click(function () {
+      price = $("#num").val();
+      if ($("#num").val() == 1) {
+        return;
+      } else {
+        price--;
+      }
+      $("#num").val(price);
+    });
+    $("#add").click(function () {
+      price = $("#num").val();
+      price++;
+      $("#num").val(price);
+    });
+  }
+  purchaseQuantityButton();
+
   const JsonData = [
     {
       imagePath: "images/test/绿色.jpg",
@@ -179,86 +330,127 @@
     },
   ];
 
-  // 获取根节点
-  const rootDom = document.getElementsByClassName("shopPage")[0];
+  // 创建元素
+  function creatingElements() {
+    // 获取根节点
+    const rootDom = document.getElementsByClassName("shopPage")[0];
+    // 遍历 JosnData获取动态添加的图片地址、标题、详细信息
+    for (const s of JsonData) {
+      const imagePath = s["imagePath"];
+      const title = s["title"];
+      const data = s["data"];
+      // 创建main节点
+      const mainDom = document.createElement("div");
+      //添加class属性
+      mainDom.classList.add("main");
+      // 给main节点添加点击事件
+      mainDom.onclick = function goShopping() {
+        // 设置需要购买的内容
+        creat("itemInformation", s);
+        // 显示遮罩层
+        maskLayerControl(true);
+        //
+      };
+      // 将main挂载到根节点
+      rootDom.appendChild(mainDom);
+      //创建imagebox节点
+      const imagebox = document.createElement("div");
+      // 给imagebox节点添加class
+      imagebox.classList.add("imagebox");
+      //创建imagebox节点下的img标签
+      const imagebox_img = document.createElement("img");
+      // 给img添加src
+      imagebox_img.src = imagePath;
+      // 将imagebox_img挂载到imagebox
+      imagebox.appendChild(imagebox_img);
+      // 将imagebox挂载到mainDom
+      mainDom.appendChild(imagebox);
+      // 创建右侧标题
+      const titleDiv = document.createElement("div");
+      // 添加class
+      titleDiv.classList.add("title");
+      // 创建标题
+      const title_one_div = document.createElement("div");
+      // 添加class
+      title_one_div.classList.add("title_one");
+      title_one_div.textContent = title;
+      // 创建详细内容
+      const title_two_div = document.createElement("div");
+      // 添加class
+      title_two_div.classList.add("title_two");
+      title_two_div.textContent = data;
 
-  // 遍历 JosnData获取动态添加的图片地址、标题、详细信息
-  for (const s of JsonData) {
-    const imagePath = s["imagePath"];
-    const title = s["title"];
-    const data = s["data"];
-
-    // 创建main节点
-    const mainDom = document.createElement("div");
-    //添加class属性
-    mainDom.classList.add("main");
-    // 给main节点添加点击事件
-    mainDom.onclick = function goShopping() {
-      // 清空localStorage的内容
-      localStorage.clear;
-      // 设置需要购买的内容
-      localStorage.setItem("shopping", JSON.stringify(s));
-      // 显示遮罩层
-      maskLayerControl(true);
-
-      //
-    };
-    // 将main挂载到根节点
-    rootDom.appendChild(mainDom);
-    //创建imagebox节点
-    const imagebox = document.createElement("div");
-    // 给imagebox节点添加class
-    imagebox.classList.add("imagebox");
-    //创建imagebox节点下的img标签
-    const imagebox_img = document.createElement("img");
-    // 给img添加src
-    imagebox_img.src = imagePath;
-    // 将imagebox_img挂载到imagebox
-    imagebox.appendChild(imagebox_img);
-    // 将imagebox挂载到mainDom
-    mainDom.appendChild(imagebox);
-    // 创建右侧标题
-    const titleDiv = document.createElement("div");
-    // 添加class
-    titleDiv.classList.add("title");
-    // 创建标题
-    const title_one_div = document.createElement("div");
-    // 添加class
-    title_one_div.classList.add("title_one");
-    title_one_div.textContent = title;
-    // 创建详细内容
-    const title_two_div = document.createElement("div");
-    // 添加class
-    title_two_div.classList.add("title_two");
-    title_two_div.textContent = data;
-
-    //将两个title挂载到titleDiv
-    titleDiv.appendChild(title_one_div);
-    titleDiv.appendChild(title_two_div);
-    // 将titleDiv挂载到mainDom
-    mainDom.appendChild(titleDiv);
-
-    // <div class="main">
-    //   <div class="imagebox">
-    //     <img style="width: 60%" src="images/test/绿色.jpg" />
-    //   </div>
-    //   <div class="title">
-    //     <div class="title_one">绿色脸谱</div>
-    //     <div class="title_two">
-    //       寓意：一般象征顽强、暴躁、典型人物：武天虬。
-    //     </div>
-    //   </div>
-    // </div>
+      //将两个title挂载到titleDiv
+      titleDiv.appendChild(title_one_div);
+      titleDiv.appendChild(title_two_div);
+      // 将titleDiv挂载到mainDom
+      mainDom.appendChild(titleDiv);
+    }
   }
-
+  creatingElements();
   // 遮罩层控制
   function maskLayerControl(result) {
     // 获取遮罩层dom节点
     const maskDom = document.getElementsByClassName("modal")[0];
     if (result) {
       maskDom.style.display = "flex";
+      // 禁止浏览器滚动条滚动
+      $("body").css({
+        overflow: "hidden",
+      });
+
+      buildPurchasePage();
     } else {
       maskDom.style.display = "none";
+      // 还原滚动
+      $("body").css({
+        overflow: "auto",
+      });
     }
+  }
+
+  // 构建购买页面
+  function buildPurchasePage() {
+    $("#num").val(1);
+    const data = get("itemInformation");
+    // const data = {
+    //   imagePath: "images/test/蓝色.jpg",
+    //   title: "蓝色脸谱",
+    //   data: "寓意：一般象征刚直、桀骜不驯、有心计。典型人物：窦尔敦。",
+    // };
+    console.log(data);
+    // 获取左侧div
+    const shoppingDivLeftElement =
+      document.getElementsByClassName("shoppingDivLeft")[0];
+    //创建img标签
+    const shoppingDivLeftImg = document.createElement("img");
+    shoppingDivLeftImg.classList.add("shoppingDivLeftImg");
+    shoppingDivLeftImg.src = data["imagePath"];
+    // 判断shoppingDivLeft是否存在子元素
+    if (
+      document.getElementsByClassName("shoppingDivLeft")[0].children.length < 1
+    ) {
+      shoppingDivLeftElement.appendChild(shoppingDivLeftImg);
+    } else {
+      // 删除上一个子元素
+      shoppingDivLeftElement.removeChild(
+        document.getElementsByClassName("shoppingDivLeftImg")[0]
+      );
+      // 加载新的元素
+      shoppingDivLeftElement.appendChild(shoppingDivLeftImg);
+    }
+
+    // 获取右侧div
+    const shoppingDivRightElement = document.getElementsByClassName(
+      "shoppingDivRightElement"
+    )[0];
+    //创建标题标签
+    const shoppingDivLeftTitle = document.createElement("text");
+    //创建简介标签
+    const introductionToShoppingDivLeft = document.createElement("text");
+    //创建数量标签
+    const shoppingDivLeftQuantity = document.createElement("img");
+    //创建购买按钮
+    const shoppingDivLeftPurchaseButton = document.createElement("button");
   }
 </script>
