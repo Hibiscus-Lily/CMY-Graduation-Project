@@ -165,9 +165,10 @@
     }
 
     .custom-btn {
+      color: rgb(97, 97, 97);
+      border: none;
       width: 130px;
       height: 40px;
-      color: #fff;
       border-radius: 5px;
       padding: 10px 25px;
       font-family: "Lato", sans-serif;
@@ -181,13 +182,7 @@
         7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
       outline: none;
     }
-
-    /* 16 */
-    .btn-16 {
-      border: none;
-      color: #000;
-    }
-    .btn-16:after {
+    .custom-btn:after {
       position: absolute;
       content: "";
       width: 0;
@@ -195,20 +190,19 @@
       top: 0;
       left: 0;
       direction: rtl;
-      z-index: -1;
       box-shadow: -7px -7px 20px 0px #fff9, -4px -4px 5px 0px #fff9,
         7px 7px 20px 0px #0002, 4px 4px 5px 0px #0001;
       transition: all 0.3s ease;
     }
-    .btn-16:hover {
+    .custom-btn:hover {
       color: #000;
     }
-    .btn-16:hover:after {
+    .custom-btn:hover:after {
       left: auto;
       right: 0;
       width: 100%;
     }
-    .btn-16:active {
+    .custom-btn:active {
       top: 2px;
     }
   </style>
@@ -259,7 +253,7 @@
                   <span> + </span>
                 </button>
               </div>
-              <div><button class="custom-btn btn-16">Read More</button></div>
+              <div><button class="custom-btn">点击购买</button></div>
             </div>
           </div>
         </div>
@@ -269,6 +263,7 @@
 </html>
 <script src="./js/store.js"></script>
 <script>
+  // purchaseQuantityButton
   function purchaseQuantityButton() {
     $("#cut").click(function () {
       price = $("#num").val();
@@ -284,6 +279,8 @@
       price++;
       $("#num").val(price);
     });
+
+
   }
   purchaseQuantityButton();
 
@@ -330,7 +327,7 @@
     },
   ];
 
-  // 创建元素
+  // 构建面具
   function creatingElements() {
     // 获取根节点
     const rootDom = document.getElementsByClassName("shopPage")[0];
