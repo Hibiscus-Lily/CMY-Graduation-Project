@@ -72,8 +72,8 @@
       color: #585858;
     }
     .modal {
-      /* display: none; */
-      display: flex;
+      display: none;
+      /* display: flex; */
       flex-direction: row-reverse;
       justify-content: center;
       align-content: center;
@@ -89,7 +89,7 @@
       width: 60%;
     }
     .modal > div {
-      width: 90%;
+      width: 70%;
       height: 80%;
     }
     .shoppingDiv {
@@ -124,6 +124,12 @@
       width: 50%;
       background-color: aqua;
     }
+    .shoppingDivRight {
+      height: 60%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
     input[type="number"]::-webkit-inner-spin-button,
     input[type="number"]::-webkit-outer-spin-button {
       -webkit-appearance: none;
@@ -155,6 +161,7 @@
       height: 12px;
     }
     input {
+      background: transparent;
       width: 40px;
       text-align: center;
       border: none;
@@ -165,6 +172,8 @@
     }
 
     .custom-btn {
+      float: right;
+      margin-top: 10px;
       color: rgb(97, 97, 97);
       border: none;
       width: 130px;
@@ -241,8 +250,12 @@
             </div>
             <div class="shoppingDivRight">
               <div class="shoppingDivRightH">
-                <h1>111</h1>
-                <h6>222</h6>
+                <div class="addH">
+                  <!-- <h1>蓝色脸谱</h1>
+                  <h6>
+                    寓意：一般象征刚直、桀骜不驯、有心计。典型人物：窦尔敦。
+                  </h6> -->
+                </div>
               </div>
               <div>
                 <button class="inputButton" id="cut" style="color: red">
@@ -279,8 +292,6 @@
       price++;
       $("#num").val(price);
     });
-
-
   }
   purchaseQuantityButton();
 
@@ -410,11 +421,7 @@
   function buildPurchasePage() {
     $("#num").val(1);
     const data = get("itemInformation");
-    // const data = {
-    //   imagePath: "images/test/蓝色.jpg",
-    //   title: "蓝色脸谱",
-    //   data: "寓意：一般象征刚直、桀骜不驯、有心计。典型人物：窦尔敦。",
-    // };
+
     console.log(data);
     // 获取左侧div
     const shoppingDivLeftElement =
@@ -437,17 +444,31 @@
       shoppingDivLeftElement.appendChild(shoppingDivLeftImg);
     }
 
-    // 获取右侧div
-    const shoppingDivRightElement = document.getElementsByClassName(
-      "shoppingDivRightElement"
-    )[0];
+    // 获取右侧需要添加div标题标签
+    const shoppingDivRightHElement = document.getElementsByClassName("addH")[0];
     //创建标题标签
-    const shoppingDivLeftTitle = document.createElement("text");
+    const shoppingDivLeftTitle = document.createElement("h1");
+    const title = document.createTextNode(data["title"]);
+    shoppingDivLeftTitle.appendChild(title)
     //创建简介标签
-    const introductionToShoppingDivLeft = document.createElement("text");
-    //创建数量标签
-    const shoppingDivLeftQuantity = document.createElement("img");
-    //创建购买按钮
-    const shoppingDivLeftPurchaseButton = document.createElement("button");
+    const introductionToShoppingDivLeft = document.createElement("h6");
+    const introduction = document.createTextNode(data["data"]);
+    introductionToShoppingDivLeft.appendChild(introduction)
+
+    // 判断shoppingDivLeft是否存在子元素
+    if (document.getElementsByClassName("addH")[0].children.length < 1) {
+      // 不存在元素，直接添加
+
+      shoppingDivRightHElement.appendChild(shoppingDivLeftTitle);
+      shoppingDivRightHElement.appendChild(introductionToShoppingDivLeft);
+    } else {
+      // 存在元素，删除后添加
+
+      shoppingDivRightHElement.removeChild(document.getElementsByTagName("h1")[0])
+      shoppingDivRightHElement.removeChild(document.getElementsByTagName("h6")[0])
+      // // 加载新的元素
+      shoppingDivRightHElement.appendChild(shoppingDivLeftTitle);
+      shoppingDivRightHElement.appendChild(introductionToShoppingDivLeft);
+    }
   }
 </script>
